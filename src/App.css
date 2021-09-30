@@ -1,0 +1,151 @@
+body {
+  display: flex;
+  margin-top: 50px;
+  background-image: url("./assets/tap.jpg");
+  background-repeat:no-repeat;
+  background-size: auto;
+  background-attachment: scroll; 
+}
+
+/* Header Page */
+.headerDiv { 
+  background-color: palegoldenrod;
+  height: 300px;
+  width: 500px;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 20px;
+  top: 50%;
+  left: 50%;
+  margin-top: -9em;
+  margin-left: -15em;
+  border: 1px solid black;
+  position: fixed;
+
+}
+
+.header {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 60px
+}
+
+.headerNav {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  margin-left: 50px;
+  font-size: 30px;
+}
+
+/*SiteBar*/
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 600px) {
+  .navbar right, 
+  .navbar {float: none;}
+}
+
+/* Auth Page */
+
+.loginForm {
+  padding: 20px;
+  width: 350px;
+  height: 450px;
+  background-color: white;
+  border-radius: 7px;
+  border: 1px solid black;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 20px;
+  top: 40%;
+  left: 50%;
+  margin-top: -9em;
+  margin-left: -15em;
+  border: 1px solid black;
+  position: fixed;
+}
+
+.signUp {
+  padding: 20px;
+  width: 350px;
+  height: 450px;
+  background-color: white;
+  border-radius: 7px;
+  border: 1px solid black;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 20px;
+  top: 40%;
+  left: 50%;
+  margin-top: -9em;
+  margin-left: -15em;
+  border: 1px solid black;
+  position: fixed;
+}
+
+/*Post Form*/
+
+.tripform { 
+  background-color: white;
+  width: 400px;
+  padding: 20px;
+  margin-left: 30px;
+}
+
+/*Brewery*/
+.apiCard {
+  background-color: white;
+  width: 300px;
+  margin-top: 15px;
+}
+
+
+.cardsMap {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+/* MemberForm*/
+
+.profileform {
+  background: lightgray;
+  width: 400px;
+  padding: 20px;
+
+}
+
+.memberinput {
+  border: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  padding: 12px;
+  border-radius: 3px; 
+  width: 250px;
+  outline: none
+}
+
+.memberinput:hover {
+  font-size: 130%;
+  transition: font-size 0.3s ease;
+}
+
+.memberinput:focus::placeholder {
+  color: transparent;
+}
+
+.memberinput::placeholder {
+  color: #222;
+  transition: color 0.4s ease;
+}
+
+.profileHeader {
+  font-size: 70px;
+  font-weight: bold;
+}
