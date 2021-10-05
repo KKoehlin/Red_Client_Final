@@ -32,7 +32,7 @@ export class PostView extends React.Component<ViewProps, ViewState> {
     fetchPost = async () => {
         // if (this.props.token) {
             try {
-                const res = await fetch(`http://localhost:3000/post`, {
+                const res = await fetch(`http://localhost:3000/post/mine`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

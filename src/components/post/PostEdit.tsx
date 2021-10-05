@@ -28,7 +28,8 @@ export class PostEdit extends React.Component<PEProps, PEState> {
         }
     }
 
-    editPost = async () => {
+    editPost = async (e: any) => {
+        e.preventDefault()
         try {
             const res = await fetch(`http://localhost:3000/post/update/${this.props.updatePost.id}`,
                 {
@@ -93,11 +94,12 @@ export class PostEdit extends React.Component<PEProps, PEState> {
                                 <Input  name="tripPlans" value={this.state.tripPlan} onChange={this.handleChange} />
                             </FormGroup>
                             <Button type="submit"
-                            onClick={() => {
-                                this.editPost()
+                            onClick={(e) => {
+                                this.editPost(e)
                                 this.modalToggle()
-                            }}>Update Profile!</Button>
-                            <Button onClick={this.modalToggle}>
+                            }}>Update Trip!</Button>
+                            <Button onClick={() => {
+                                this.modalToggle()}}>
                                 Cancel
                             </Button>
                         </Form>

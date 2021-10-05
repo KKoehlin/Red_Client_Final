@@ -16,8 +16,8 @@
     text-decoration: none;
 }
 
-.navbutton {
-    margin: auto;
+.navbutton {    
+    float: right; 
     border: none;
     background-color: none;
     font-size: 20px;
