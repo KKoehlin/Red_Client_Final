@@ -5,6 +5,7 @@ import { Login } from './Login'
 import { SignUp } from './SignUp'
 import { Redirect } from 'react-router-dom'
 
+
 type AuthProps = {
     updateToken:(t: string) => void
 }

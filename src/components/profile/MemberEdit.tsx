@@ -3,6 +3,7 @@ import { MemberState } from './MemberCreate'
 import { Profile } from './MemberView'
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap'
 import './Member.css'
+import APIURL from '../../helpers/environment'
 
 type MEProps = {
     updateMember: Profile
@@ -33,7 +34,7 @@ export class MemberEdit extends React.Component<MEProps, MEState> {
     editMember = async () => {
         console.info(this.props.updateMember.id)
         try {
-            const res = await fetch(`http://localhost:3000/profile/update/${this.props.updateMember.id}`,
+            const res = await fetch(`${APIURL}/profile/update/${this.props.updateMember.id}`,
                 {
                     method: 'PUT',
                     body: JSON.stringify({

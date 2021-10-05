@@ -3,6 +3,7 @@ import { profile } from '../../types'
 import { Button } from 'reactstrap'
 import { MemberState } from './MemberCreate'
 import './Member.css'
+import APIURL from '../../helpers/environment'
 
 type DisplayProps = {
     token: string | null
@@ -30,7 +31,7 @@ export class MemberDisplay extends React.Component<DisplayProps, MDState> {
 
     deleteMember = async (e: any, id: number) => {
         e.preventDefault()
-        fetch(`http://localhost:3000/profile/delete/${id}`, {
+        fetch(`${APIURL}/profile/delete/${id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

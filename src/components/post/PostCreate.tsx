@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap'
 import "./Post.css"
+import APIURL from '../../helpers/environment'
 
 type PostProps = {
     token: string | null
@@ -29,7 +30,7 @@ export class PostCreate extends React.Component<PostProps, PostState> {
 
     newPost = async(e: React.FormEvent<HTMLFormElement>): Promise<void> => {e.preventDefault()
     try {
-        const response = await fetch("http://localhost:3000/post/create", {
+        const response = await fetch(`${APIURL}/post/create`, {
             method: 'POST',
             body: JSON.stringify(
                 

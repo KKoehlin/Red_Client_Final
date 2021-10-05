@@ -5,6 +5,7 @@ import { PostEdit } from './PostEdit'
 import { PostDisplay } from './PostDisplay'
 import { PostCreate } from './PostCreate'
 import './Post.css'
+import APIURL from '../../helpers/environment'
 
 
 type ViewProps = {
@@ -32,7 +33,7 @@ export class PostView extends React.Component<ViewProps, ViewState> {
     fetchPost = async () => {
         // if (this.props.token) {
             try {
-                const res = await fetch(`http://localhost:3000/post/mine`, {
+                const res = await fetch(`${APIURL}/post/mine`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

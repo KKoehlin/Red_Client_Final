@@ -2,6 +2,7 @@ import React from 'react'
 import { PostState } from './PostCreate'
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap'
 import './Post.css'
+import APIURL from '../../helpers/environment'
 
 type PEProps = {
     updatePost: { [key: string]: any }
@@ -31,7 +32,7 @@ export class PostEdit extends React.Component<PEProps, PEState> {
     editPost = async (e: any) => {
         e.preventDefault()
         try {
-            const res = await fetch(`http://localhost:3000/post/update/${this.props.updatePost.id}`,
+            const res = await fetch(`${APIURL}/post/update/${this.props.updatePost.id}`,
                 {
                     method: 'PUT',
                     headers: new Headers({

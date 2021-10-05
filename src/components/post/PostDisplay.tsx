@@ -2,6 +2,7 @@ import React from 'react'
 import { PostState } from './PostCreate'
 import { Button } from 'reactstrap'
 import './Post.css'
+import APIURL from '../../helpers/environment'
 
 type DisplayProps = {
     token: string | null
@@ -31,7 +32,7 @@ export class PostDisplay extends React.Component<DisplayProps, DisplayState> {
 
     deletePost = async (e: any, id: number) => {
         e.preventDefault()
-        await fetch(`http://localhost:3000/post/delete/${id}`, {
+        await fetch(`${APIURL}/post/delete/${id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

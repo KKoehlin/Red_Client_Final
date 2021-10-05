@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { Redirect, Link } from 'react-router-dom'
-import { truncateSync } from 'fs';
+import APIURL from '../../helpers/environment'
 
 type LoginProps = {
     updateToken: (t: string) => void
@@ -31,7 +31,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
 
     handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        fetch("http://localhost:3000/user/login", {
+        fetch(`${APIURL}/user/login`, {
             method: 'POST',
             body: JSON.stringify({
                 user:

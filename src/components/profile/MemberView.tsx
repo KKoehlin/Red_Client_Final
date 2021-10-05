@@ -5,6 +5,7 @@ import { MemberCreate } from "./MemberCreate"
 import { MemberEdit } from './MemberEdit'
 import {MemberDisplay} from './MemberDisplay'
 import './Member.css'
+import APIURL from '../../helpers/environment'
 
 type MemberProps = {
     token: string | null
@@ -40,7 +41,7 @@ export class MemberView extends React.Component<MemberProps, MemberState>{
     fetchProfile = async () => {
         if (this.props.token)
         try {
-        const res = await fetch('http://localhost:3000/profile/mine', {
+        const res = await fetch(`${APIURL}/profile/mine`, {
             method: 'GET',
             headers:{
                 'Content-Type': 'application/json',

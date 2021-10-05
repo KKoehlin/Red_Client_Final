@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, FormGroup, Input, Button } from 'reactstrap'
 import './Member.css'
+import APIURL from '../../helpers/environment'
 
 type MemberProps = {
     token: string | null
@@ -28,7 +29,7 @@ export class MemberCreate extends React.Component<MemberProps, MemberState> {
     newMember = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault()
         try {
-            const res = await fetch("http://localhost:3000/profile/create", {
+            const res = await fetch(`${APIURL}/profile/create`, {
                 method: 'POST',
                 body: JSON.stringify(
 

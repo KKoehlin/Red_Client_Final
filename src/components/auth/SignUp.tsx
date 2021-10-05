@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { Link } from 'react-router-dom'
+import APIURL from '../../helpers/environment'
 
 type SignUpProps = {
     updateToken(t: string): void
@@ -28,7 +29,7 @@ export class SignUp extends Component<SignUpProps, SignUpState> {
 
     handleSubmit(event: React.FormEvent) {
         event.preventDefault();
-        fetch("http://localhost:3000/user/register", {
+        fetch(`${APIURL}/user/register`, {
             method: 'POST',
             body: JSON.stringify({
                 user: {
