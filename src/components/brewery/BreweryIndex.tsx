@@ -4,9 +4,11 @@ import {
 } from 'reactstrap';
 import { BreweryCard } from "./BreweryCard"
 import { BreweryResponse, Result } from './BreweryInterface'
+import "./Brewery.css"
+import { Redirect } from "react-router-dom"
 
 type BreweryProps = {
-    token: string 
+    token: string | null
 }
 type BreweryState = {
     loaded: boolean
@@ -54,14 +56,15 @@ export class BreweryIndex extends Component<BreweryProps, BreweryState> {
     }
 
     render() {
+        if (!this.props.token) return <Redirect to="/" />
         return (
             <Container>
-                <div>
+                <div className="search">
                     <Input
                         onChange={(e) => this.setState({city: e.target.value})}
                         type="text"
                         placeholder='Search by City Here' />
-                        <button onClick={this.searchByCity}>look it up</button>
+                        <button className="searchbutton" onClick={this.searchByCity}>look it up</button>
                 </div>
                 <CardColumns>
                     <div className='cardsMap'>

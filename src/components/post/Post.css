@@ -1,0 +1,42 @@
+.tripform { 
+    background-color: white;
+    width: 500px;
+    padding: 20px;
+    margin-left: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: 1px solid black;
+  }
+
+  .displayform {
+    background: white;
+    width: 25em;
+    height: 20em;
+    padding: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 80px;
+    border: 1px solid black;
+  }
+
+  .displaywrapper {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+
+  .deletebutton {
+      margin: 10px;
+      background-color: rgb(116, 23, 23);
+      border: none;
+      font-weight: bold;
+      font-size: 15px;
+  }
+
+  .updatebutton {
+      margin: 10px;
+      background-color: rgb(67, 140, 145);
+      border: none;
+      font-weight: bold;
+      font-size: 15px;
+  }

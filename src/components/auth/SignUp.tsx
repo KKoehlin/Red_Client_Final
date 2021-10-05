@@ -59,7 +59,10 @@ export class SignUp extends Component<SignUpProps, SignUpState> {
                     <br />
                     <FormGroup>
                         <Label htmlFor="password">Password</Label>
-                        <Input onChange={(e) => this.setState({ password: e.target.value })} name="password" value={this.state.password}
+                        <Input onChange={(e) => this.setState({ password: e.target.value })} 
+                        name="password" 
+                        type="password"
+                        value={this.state.password}
                         minLength={8} />
                     </FormGroup>
                     <br />

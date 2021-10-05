@@ -72,6 +72,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
                         <Input
                             onChange={(e) => this.setState({ password: e.target.value })}
                             name="password"
+                            type="password"
                             value={this.state.password} />
                     </FormGroup>
                     <br />

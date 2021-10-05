@@ -14,8 +14,7 @@ import { Sitebar } from './common/Navbar'
 
 
 type AppState = {
-  token: string
-  userRole: string
+  token: string | null
 }
 
 class App extends React.Component<{}, AppState> {
@@ -24,7 +23,6 @@ class App extends React.Component<{}, AppState> {
     super(props)
     this.state = {
       token: "",
-      userRole: ""
     }
   }
 
@@ -51,9 +49,9 @@ class App extends React.Component<{}, AppState> {
     this.setState({ token: "" })
   }
 
-  // protectedViews = () => {
-  //   return this.state.token === localStorage.getItem('token') ? (<MemberView token={this.state.token} />) : (<Auth updateToken={this.updateToken} />)
-  // }
+  protectedViews = () => {
+     return this.state.token === localStorage.getItem('token') ? (<MemberView token={this.state.token} />) : (<Auth updateToken={this.updateToken} />)
+   }
 
   render() {
     return (
@@ -62,7 +60,6 @@ class App extends React.Component<{}, AppState> {
         <Sitebar
           logout={this.clearToken}
           token={this.state.token}
-          //userRole={this.state.userRole}
         />
         <Switch>
           <Route exact path="/">
@@ -74,10 +71,12 @@ class App extends React.Component<{}, AppState> {
           </Route>
           <Route exact path="/member">
             <MemberView token={this.state.token} />
-            <PostView token={this.state.token} />
           </Route>
           <Route path="/brewery">
             <BreweryIndex token={this.state.token} />
+          </Route>
+          <Route path="/post">
+          <PostView token={this.state.token} />
           </Route>
         </Switch>
         {/* {this.state.token === localStorage.getItem('token') ? <MemberView token={this.state.token} /> : <Auth updateToken={this.updateToken} />

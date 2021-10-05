@@ -1,53 +1,80 @@
 import React from 'react'
-import { profile } from './types'
-import {Button} from 'reactstrap'
+import { profile } from '../../types'
+import { Button } from 'reactstrap'
+import { MemberState } from './MemberCreate'
+import './Member.css'
 
 type DisplayProps = {
-    member: profile[],
-    token: string,
-    fetchProfile: () => void,
+    token: string | null
+    profileData: Array<object>
+    fetchProfile: (e: any) => Promise<any>
     updateOn: () => void,
-    setProfile: (p: profile) => void
+    editProfile: (profile: any) => void
 }
 
-export class MemberDisplay extends React.Component <DisplayProps, {}> {
-    constructor(props:DisplayProps) {
-        super(props) 
+interface MDState extends MemberState {
+    id: number
+}
+
+export class MemberDisplay extends React.Component<DisplayProps, MDState> {
+    constructor(props: DisplayProps) {
+        super(props)
+        this.state = {
+            id: Infinity,
+            profile: [],
+            destination: '',
+            date: '',
+            journal: ''
+        }
     }
 
-    deleteMember(member: profile) {
-        fetch(`http://localhost:3000/profile/${member.id}`, {
+    deleteMember = async (e: any, id: number) => {
+        e.preventDefault()
+        fetch(`http://localhost:3000/profile/delete/${id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.props.token}`
-            })
-        }).then(() => this.props.fetchProfile())
+                'Authorization': `Bearer ${this.props.token}`,
+            }),
+        })
+        return this.props.fetchProfile(e)
     }
 
-    memberProfile(): JSX.Element[] {
-        return this.props.member.map((member: profile) => {
-            return(
-                <tr key={member.id}>
-                    <td>{member.fname}</td>
-                    <td>{member.age}</td>
-                    <td>{member.hometown}</td>
-                    <td>{member.favbev}</td>
-                    <td>{member.wishlist}</td>
-                    <td>
-                        <Button color="warning" onClick={() => { this.props.setProfile(member)
-                        this.props.updateOn()}}>Update</Button>
-                    </td>
-                    <td>
-                        <Button color="danger" onClick={() => {this.deleteMember(member)}}>Delete</Button>
-                    </td>
-                </tr>
-            )
-        })}
-        render(){
-        return(
-            <div>
-            </div>
+    render() {
+        return (
+            <div className="displaywrapper">
+                {this.props.profileData.length > 0 ? (
+                    <>
+                        {this.props.profileData.map(
+                            (profile: any,
+                                index: number) => {
+                                return (
+                                    <div className="displayform" key={index}>
+                                        <p className="displaydes">{profile.destination}</p>
+                                        <p className="displaydate">{profile.date}</p>
+                                        <p>{profile.journal}</p>
+                                        <div>
+                                            <Button className="updatebutton" onClick={() => {
+                                                this.props.editProfile(profile)
+                                                this.props.updateOn()
+                                            }}>Update</Button>
+
+                                            <Button className="deletebutton" onClick={e => this.deleteMember(e, profile.id)}>
+                                                Delete
+                                        </Button>
+                                        </div>
+                                    </div >
+                                )
+                            }
+                        )
+                        }
+                    </>
+                ) : (
+                    <>
+                    </>
+                )}
+            </div >
         )
     }
+
 }

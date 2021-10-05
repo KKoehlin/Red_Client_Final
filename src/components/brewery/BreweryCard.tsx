@@ -4,6 +4,7 @@ import {
     Card, CardHeader, CardFooter, CardBody,
     CardTitle, CardText
 } from 'reactstrap';
+import "./Brewery.css"
 
 type CardProps = {
     brewery: Result

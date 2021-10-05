@@ -1,0 +1,29 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .navbar right, 
+    .navbar {float: none;}
+  }
+
+.links {
+    color: black;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+.navbutton {
+    margin: auto;
+    border: none;
+    background-color: none;
+    font-size: 20px;
+    border-radius: 7px;
+}
+
+.navbutton:hover {
+    color: rgb(118, 9, 9);
+}

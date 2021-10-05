@@ -1,13 +1,13 @@
 import React from 'react'
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap'
+import "./Post.css"
 
 type PostProps = {
-    token: string
-    fetchPost:() => void
+    token: string | null
+    fetchPost:() => Promise<any>
 }
 
 export type PostState = {
-    post: Array<object>,
     tripName: string,
     location: string,
     date: string,
@@ -19,7 +19,6 @@ export class PostCreate extends React.Component<PostProps, PostState> {
     constructor(props: PostProps) {
         super(props)
         this.state = {
-            post: [],
             tripName: '',
             location: '',
             date: '',
@@ -32,8 +31,8 @@ export class PostCreate extends React.Component<PostProps, PostState> {
     try {
         const response = await fetch("http://localhost:3000/post/create", {
             method: 'POST',
-            body: JSON.stringify({
-                user:
+            body: JSON.stringify(
+                
                 {
                     tripName: this.state.tripName,
                     location: this.state.location,
@@ -41,7 +40,7 @@ export class PostCreate extends React.Component<PostProps, PostState> {
                     travelPartner: this.state.travelPartner,
                     tripPlan: this.state.tripPlan
                 }
-            }),
+            ),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.props.token}`
@@ -57,7 +56,7 @@ export class PostCreate extends React.Component<PostProps, PostState> {
         })
         this.props.fetchPost()
     } catch (err) {
-        console.log(err)
+        console.info(err)
     }
 }
 
@@ -70,12 +69,12 @@ handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 }
     render() {
         return (
-            <>
-                <h3>Create Trip</h3>
+            <> 
                 <Form className="tripform" onSubmit={this.newPost}>
+                <h3>Create a Trip!</h3>
                     <FormGroup>
                         <Label htmlFor="tripName">Trip Name:</Label>
-                        <Input name="age" value={this.state.tripName} onChange={this.handleChange}
+                        <Input name="tripName" value={this.state.tripName} onChange={this.handleChange}
                         />
                         <br />
                         <Label htmlFor="location">Location:</Label>

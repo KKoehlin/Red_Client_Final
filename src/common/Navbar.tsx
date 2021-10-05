@@ -9,11 +9,12 @@ import {
   NavLink,
   NavbarText,
 } from 'reactstrap'
+import './Navbar.css'
 
 
 type SBProps = {
-  token: string 
-  logout: () => void // from app.tsx
+  token: string | null
+  logout: () => void
 }
 
 type SBState = {
@@ -30,11 +31,11 @@ export class Sitebar extends React.Component<SBProps, SBState> {
   toggle = () => this.setState({ isOpen: !this.state.isOpen })
 
   logoutButton = () => {
-    return localStorage.getItem('sessionToken') === null ? (
+    return localStorage.getItem('token') === null ? (
       ''
     ) : (
       <Link to='/'>
-        <button onClick={this.props.logout}>Logout</button>
+        <button className="navbutton" onClick={this.props.logout}>Logout</button>
       </Link>
     )
   }
@@ -48,16 +49,30 @@ export class Sitebar extends React.Component<SBProps, SBState> {
             <Nav className='mr-auto' navbar>
               <NavItem>
                 <NavLink>
-                  <Link to='/' className='text-muted'>
+                  <Link to='/'className="links">
                     Home
                   </Link>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink>
-                  <Link to='/member' className='text-muted'>
-                    Profile
+                  <Link to='/member'className="links">
+                    Travel Journal
                   </Link>
+                </NavLink>
+                </NavItem>
+                <NavItem>
+                <NavLink>
+                  <Link to='/post'className="links">
+                    Plan Your Trip 
+                    </Link>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink>
+                  <Link to='/brewery' className="links">
+                    Find Local Spots
+                    </Link>
                 </NavLink>
               </NavItem>
             </Nav>

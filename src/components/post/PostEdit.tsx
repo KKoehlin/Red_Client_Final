@@ -1,12 +1,13 @@
 import React from 'react'
 import { PostState } from './PostCreate'
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap'
+import './Post.css'
 
 type PEProps = {
     updatePost: { [key: string]: any }
-    token: string
+    token: string | null
     updateOff: () => void
-    fetchPost: () => Promise<any>
+    fetchPost: () => void
     open: boolean
 }
 
@@ -19,7 +20,6 @@ export class PostEdit extends React.Component<PEProps, PEState> {
         super(props)
         this.state = {
             isModalVisible: true,
-            post: [],
             tripName: this.props.updatePost.tripName,
             location: this.props.updatePost.location,
             date: this.props.updatePost.date,
@@ -28,9 +28,9 @@ export class PostEdit extends React.Component<PEProps, PEState> {
         }
     }
 
-    editPost = async (id: number) => {
+    editPost = async () => {
         try {
-            const res = await fetch(`http://localhost:3000/profile/update/${this.props.updatePost.id}`,
+            const res = await fetch(`http://localhost:3000/post/update/${this.props.updatePost.id}`,
                 {
                     method: 'PUT',
                     headers: new Headers({
@@ -46,6 +46,7 @@ export class PostEdit extends React.Component<PEProps, PEState> {
                     }),
                 })
             await res.json()
+            this.props.updateOff()
             this.props.fetchPost();
         } catch (err) {
             console.log(err)
@@ -92,11 +93,11 @@ export class PostEdit extends React.Component<PEProps, PEState> {
                                 <Input  name="tripPlans" value={this.state.tripPlan} onChange={this.handleChange} />
                             </FormGroup>
                             <Button type="submit"
-                            onClick={(id: any) => {
-                                this.editPost(id)
+                            onClick={() => {
+                                this.editPost()
                                 this.modalToggle()
                             }}>Update Profile!</Button>
-                            <Button>
+                            <Button onClick={this.modalToggle}>
                                 Cancel
                             </Button>
                         </Form>

@@ -1,13 +1,14 @@
 import React from 'react'
 import { Container, Row, Col } from 'reactstrap'
-import { Link } from "react-router-dom"
+import { Redirect } from "react-router-dom"
 import { PostEdit } from './PostEdit'
 import { PostDisplay } from './PostDisplay'
 import { PostCreate } from './PostCreate'
-import { getTextOfJSDocComment } from 'typescript'
+import './Post.css'
+
 
 type ViewProps = {
-    token: string 
+    token: string | null
 }
 
 type ViewState = {
@@ -29,9 +30,9 @@ export class PostView extends React.Component<ViewProps, ViewState> {
     }
 
     fetchPost = async () => {
-        if (this.props.token) {
+        // if (this.props.token) {
             try {
-                const res = await fetch(`http://localhost:3000/post/mine`, {
+                const res = await fetch(`http://localhost:3000/post`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -40,22 +41,22 @@ export class PostView extends React.Component<ViewProps, ViewState> {
                 })
                 const data = await res.json()
                 this.setState({ postData: data })
-                return data
+              //  return data
             } catch (err) {
                 console.log(err)
             }
         }
-    }
+    
 
     componentDidMount = () => {
-        this.fetchPost()
-    }
+         this.fetchPost()
+     }
 
-    // componentDidUpdate(prev: ViewProps) {
-    //     if (prev.token! == this.props.token){
-    //         this.fetchPost
-    //     }
-        // }
+//     componentDidUpdate(prev: ViewProps) {
+//     if (prev.token! == this.props.token){
+//             this.fetchPost()
+//          }
+//  }
 
         editPost =(post: any) => {
             this.setState({ updatePost: post})
@@ -70,10 +71,9 @@ export class PostView extends React.Component<ViewProps, ViewState> {
         }
 
     render() {
+        if (!this.props.token) return <Redirect to="/" />
         return (
-            <Container>
-                <Row>
-                    <Col md="3">
+            <Container className="displaywrapper">
                         <PostCreate fetchPost={this.fetchPost} token={this.props.token} />
                         <PostDisplay
                             token={this.props.token}
@@ -92,8 +92,7 @@ export class PostView extends React.Component<ViewProps, ViewState> {
                             ) : (
                                 <></>
                             )}
-                    </Col>
-                </Row>
+                 
             </Container>
         )
     }

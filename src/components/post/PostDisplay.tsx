@@ -1,9 +1,10 @@
 import React from 'react'
 import { PostState } from './PostCreate'
 import { Button } from 'reactstrap'
+import './Post.css'
 
 type DisplayProps = {
-    token: string
+    token: string | null
     postData: Array<object>
     fetchPost: () => Promise<any>
     editPost: (post: string) => void
@@ -11,27 +12,26 @@ type DisplayProps = {
 }
 
 interface DisplayState extends PostState {
-    id: number
+    id: number | string
 }
 
 export class PostDisplay extends React.Component<DisplayProps, DisplayState> {
     constructor(props: DisplayProps) {
         super(props)
         this.state = {
-            id: Infinity,
-            post: [],
+            id: '',
             tripName: '',
             location: '',
             date: '',
             travelPartner: '',
-            tripPlan: ''
+            tripPlan: '',
 
         }
     }
 
-    deletePost = async (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
+    deletePost = async (e: any, id: number) => {
         e.preventDefault()
-        await fetch(`http://localhost:3000/post/${id}`, {
+        await fetch(`http://localhost:3000/post/delete/${id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -40,6 +40,7 @@ export class PostDisplay extends React.Component<DisplayProps, DisplayState> {
         })
         return this.props.fetchPost()
     }
+
     render() {
         return (
             <div>
@@ -47,20 +48,20 @@ export class PostDisplay extends React.Component<DisplayProps, DisplayState> {
                     <>
                         {this.props.postData.map((post: any, index: number) => {
                             return (
-                                <div key={index}>
+                                <div className="displayform" key={index}>
                                     <p>{post.tripName}</p>
                                     <p>{post.location}</p>
                                     <p>{post.date}</p>
                                     <p>{post.travelPartner}</p>
                                     <p>{post.tripPlan}</p>
                                     <div>
-                                        <Button onClic={() => {
+                                        <Button className="updatebutton" onClick={() => {
                                             this.props.editPost(post)
                                             this.props.updateOn()
                                         }}>
                                             Update
                                         </Button>
-                                        <Button onClick={e => this.deletePost(e, post.id)}>
+                                        <Button className="deletebutton" onClick={e => this.deletePost(e, post.id)}>
                                             Delete
                                         </Button>
                                     </div>
@@ -70,7 +71,6 @@ export class PostDisplay extends React.Component<DisplayProps, DisplayState> {
                     </>
                 ) : (
                     <>
-                        <h3>Create Travel Post</h3>
                     </>
                 )}
             </div>
