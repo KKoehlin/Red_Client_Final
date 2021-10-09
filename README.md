@@ -20,4 +20,8 @@ This is the client side of my PERN App for the final badge of the Web Developmen
 - React Styling Library
 - Strong Typing with TypeScript
 - Client fetches data from the deployed server
+<<<<<<< HEAD
 - Deployed with Heroku
+=======
+- Deployed with Heroku
+>>>>>>> 34666b843099435b084bb476b75f4bb836f7ab01
